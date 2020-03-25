@@ -26,23 +26,23 @@ class LoginRepository {
         dataResponseKey: "user_info");
   }
 
-//  Future<OieServicesResponseModel> loginFacebook({@required String emailID,
-//    @required String fbUserID,
-//    @required String latitude,
-//    @required String longitude,
-//    @required String userType}) async {
-//    Map<String, dynamic> params = {
-//      "device_type": _appSettings.deviceType,
-//      "device_unique_key": _appSettings.deviceUniqueKey,
-//      "fb_email": emailID,
-//      "fb_userid": fbUserID,
-//      "latitude": latitude,
-//      "longitude": longitude,
-//      "user_type": userType,
-//    };
-//    return await _remoteRepository.OieServPostRequest(
-//      apiEndPoint: OieServUrls.facebook_login,
-//      params: params,
-//    );
-//  }
+  Future<NotificationResponseModel> loginFacebook({@required String emailID,
+    @required String fbUserID,
+    @required String latitude,
+    @required String longitude,
+    @required String userType}) async {
+    Map<String, dynamic> params = {
+      "device_type": _appSettings.deviceType,
+      "device_unique_key": _appSettings.deviceUniqueKey,
+      "fb_email": emailID,
+      "fb_userid": fbUserID,
+      "latitude": latitude,
+      "longitude": longitude,
+      "user_type": userType,
+    };
+    return await _remoteRepository.OieServPostRequest(
+      apiEndPoint: OieServUrls.facebook_login,
+      params: params,
+    );
+  }
 }
