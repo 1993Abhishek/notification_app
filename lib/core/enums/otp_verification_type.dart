@@ -1,0 +1,1 @@
+enum OTPVerificationType { LOGIN, REGISTRATION }
