@@ -90,9 +90,9 @@ class _MyHomePageState extends State<MyHomePage> {
   String _getDeviceType() {
     ///Device Type 1=iOS 2=Android
     if (Platform.isIOS) {
-      return "1";
+      return "2";
     }
-    return "2";
+    return "1";
   }
 
   Future<String> _getId() async {
@@ -177,7 +177,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             focusNode: _nodeFirstName,
                             textInputAction: TextInputAction.next,
                             onChange: (value) {
-                              _controllerName.text=value;
+//                              _controllerName.text=value;
                               model.registrationModel.firstName = value;
                               model.registrationModel.lastName = value;
                             },

@@ -6,6 +6,7 @@ import 'package:notification_app/core/helper/extension_helper.dart';
 import 'package:notification_app/core/manager/static_data_manager.dart';
 import 'package:notification_app/core/model/_notification_response_model.dart';
 import 'package:notification_app/core/viewmodel/otp_verification_viewmodel.dart';
+import 'package:notification_app/log_in.dart';
 import 'package:notification_app/router.dart';
 import 'package:notification_app/ui/dialogs/progress_dialog.dart';
 import 'package:notification_app/ui/helper/app_colors.dart';
@@ -36,17 +37,21 @@ class _OTPVerificationViewState extends State<OTPVerificationView> {
       _controllerBlock2,
       _controllerBlock3,
       _controllerBlock4,
-      _controllerBlock5;
+      _controllerBlock5,
+      _controllerBlock6;
   FocusNode _focusNodeBlock1,
       _focusNodeBlock2,
       _focusNodeBlock3,
       _focusNodeBlock4,
-      _focusNodeBlock5;
+      _focusNodeBlock5,
+      _focusNodeBlock6;
+
   String otpText1 = "",
       otpText2 = "",
       otpText3 = "",
       otpText4 = "",
-      otpText5 = "";
+      otpText5 = "",
+      otpText6 = "";
   bool isErrorCheckingOn = false;
 
   @override
@@ -56,6 +61,7 @@ class _OTPVerificationViewState extends State<OTPVerificationView> {
     _controllerBlock3 = TextEditingController();
     _controllerBlock4 = TextEditingController();
     _controllerBlock5 = TextEditingController();
+    _controllerBlock6 = TextEditingController();
 
     _focusNodeBlock1 = FocusNode();
     _focusNodeBlock2 = FocusNode();
@@ -63,6 +69,7 @@ class _OTPVerificationViewState extends State<OTPVerificationView> {
     _focusNodeBlock4 = FocusNode();
     _focusNodeBlock4 = FocusNode();
     _focusNodeBlock5 = FocusNode();
+    _focusNodeBlock6 = FocusNode();
 
     super.initState();
   }
@@ -199,6 +206,23 @@ class _OTPVerificationViewState extends State<OTPVerificationView> {
                               }
                             },
                           ),
+                          AppSpacing.horizontalSpace(AppDimen.H_DIMEN_10),
+                          OieServicesBoxTextField(
+                            textEditingController: _controllerBlock6,
+                            focusNode: _focusNodeBlock6,
+                            hasError: isErrorCheckingOn && otpText6.isEmpty,
+                            textInputType: TextInputType.number,
+                            onChange: (value) {
+                              otpText6 = value;
+                              if (value
+                                  .toString()
+                                  .length > 0) {
+                                _focusNodeBlock6.unfocus();
+                              } else {
+                                _focusNodeBlock5.requestFocus();
+                              }
+                            },
+                          ),
                         ],
                       ),
                       AppSpacing.verticalSpace(AppDimen.V_DIMEN_50),
@@ -251,7 +275,8 @@ class _OTPVerificationViewState extends State<OTPVerificationView> {
                               otpText2.isEmpty ||
                               otpText3.isEmpty ||
                               otpText4.isEmpty ||
-                              otpText5.isEmpty) {
+                              otpText5.isEmpty ||
+                              otpText6.isEmpty) {
                             FlushbarHelper.createError(
                                 message: "Please enter your OTP",
                                 duration: Duration(seconds: 3))
@@ -259,7 +284,7 @@ class _OTPVerificationViewState extends State<OTPVerificationView> {
                             setState(() {});
                           } else {
                             String otpCode =
-                                "$otpText1$otpText2$otpText3$otpText4$otpText5";
+                                "$otpText1$otpText2$otpText3$otpText4$otpText5$otpText6";
                             _verifyRegistrationOTP(
                                 model: model, otpCode: otpCode);
 
@@ -368,9 +393,12 @@ class _OTPVerificationViewState extends State<OTPVerificationView> {
             description: response.responseMessage,
             successIcon: Icons.thumb_up,
             onActionClick: () {
-              Navigator.popUntil(
-                  context, ModalRoute.withName(Router.ROUTE_LOGIN));
-              Navigator.pushReplacementNamed(context, Router.ROUTE_LOGIN);
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => LogIn()));
+
+//              Navigator.popUntil(
+//                  context, ModalRoute.withName(Router.ROUTE_LOGIN));
+//              Navigator.pushReplacementNamed(context, Router.ROUTE_LOGIN);
             });
       },
       errorTitle: "Verification Failed",

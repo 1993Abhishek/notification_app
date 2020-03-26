@@ -315,7 +315,7 @@ class WidgetHelper {
     String errorTitle}) {
     if (response.responseStatus == StaticDataManager.statusCodeNoInternet) {
       WidgetHelper.showNoInternetSnackBar(context: context);
-    } else if (response.responseStatus == 1) {
+    } else if (response.result) {
       if (onSuccess != null) onSuccess();
     } else {
       if (onFailure != null)
