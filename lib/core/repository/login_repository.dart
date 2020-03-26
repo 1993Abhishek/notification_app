@@ -12,37 +12,36 @@ class LoginRepository {
   Future<NotificationResponseModel> authenticatingUser(
       {@required String userName,
         @required String password,
-        @required String latitude,
-        @required String longitude}) async {
+      }) async {
     Map<String, dynamic> params = {
       "device_type": _appSettings.deviceType,
       "device_unique_key": _appSettings.deviceUniqueKey,
       "username": userName,
       "password": password,
     };
-    return await _remoteRepository.OieServPostRequest(
+    return await _remoteRepository.NotificationPostRequest(
         apiEndPoint: NotificationAppURLS.log_in,
         params: params,
-        dataResponseKey: "user_info");
+        );
   }
 
-  Future<NotificationResponseModel> loginFacebook({@required String emailID,
-    @required String fbUserID,
-    @required String latitude,
-    @required String longitude,
-    @required String userType}) async {
-    Map<String, dynamic> params = {
-      "device_type": _appSettings.deviceType,
-      "device_unique_key": _appSettings.deviceUniqueKey,
-      "fb_email": emailID,
-      "fb_userid": fbUserID,
-      "latitude": latitude,
-      "longitude": longitude,
-      "user_type": userType,
-    };
-    return await _remoteRepository.OieServPostRequest(
-      apiEndPoint: OieServUrls.facebook_login,
-      params: params,
-    );
-  }
+//  Future<NotificationResponseModel> loginFacebook({@required String emailID,
+//    @required String fbUserID,
+//    @required String latitude,
+//    @required String longitude,
+//    @required String userType}) async {
+//    Map<String, dynamic> params = {
+//      "device_type": _appSettings.deviceType,
+//      "device_unique_key": _appSettings.deviceUniqueKey,
+//      "fb_email": emailID,
+//      "fb_userid": fbUserID,
+//      "latitude": latitude,
+//      "longitude": longitude,
+//      "user_type": userType,
+//    };
+//    return await _remoteRepository.OieServPostRequest(
+//      apiEndPoint: OieServUrls.facebook_login,
+//      params: params,
+//    );
+//  }
 }

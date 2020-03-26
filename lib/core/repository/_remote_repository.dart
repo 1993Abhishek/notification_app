@@ -97,7 +97,7 @@ class RemoteRepository {
     }));
   }
 
-  Future<NotificationResponseModel> OieServPostRequest({@required String apiEndPoint,
+  Future<NotificationResponseModel> NotificationPostRequest({@required String apiEndPoint,
     dynamic params,
     bool isRawResponse = false,
     String dataResponseKey = ""}) async {
@@ -124,7 +124,7 @@ class RemoteRepository {
   }
 
 
-  Future<NotificationResponseModel> OieServMultiPartRequest(
+  Future<NotificationResponseModel> NotificationMultiPartRequest(
       {@required String apiEndPoint,
         @required Map<String, dynamic> params,
         String filePath,

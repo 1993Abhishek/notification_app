@@ -8,6 +8,8 @@ class NotificationResponseModel {
   int responseStatus;
   int rawResponseStatus;
   String responseMessage;
+  int user_id;
+  bool result;
   dynamic dataResponse;
 
   NotificationResponseModel(
@@ -18,9 +20,11 @@ class NotificationResponseModel {
     debugPrint("OieServ response data==>${response.data}\n");
     try {
       rawResponseStatus = response.statusCode;
-      Map<String, dynamic> responseMap = json.decode(response.data);
-      responseMessage = responseMap['response_message'];
-      responseStatus = responseMap['response_status'];
+      Map<String, dynamic> responseMap= response.data;
+//      Map<String, dynamic> responseMap = json.decode(response.data);
+      responseMessage = responseMap['message'];
+      result= responseMap["result"];
+      user_id = responseMap['user_id'];
       if (dataResponseKey.isNotEmpty && responseMap[dataResponseKey] != null) {
         dataResponse = responseMap[dataResponseKey];
       }
